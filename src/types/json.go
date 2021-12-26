@@ -24,3 +24,15 @@ type CreatePost struct {
 	Content string `json:"content"`
 	Summary string `json:"summary"`
 }
+
+type CreateActivity struct {
+	Title string `json:"title"`
+	Email string `json:"email"`
+}
+
+type CreateToDo struct {
+	ActivityGroupId int64 `json:"activity_group_id"`
+	Title string `json:"title"`
+	IsActive bool `json:"is_active"`
+	Priority string `json:"priority"`
+}

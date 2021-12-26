@@ -7,7 +7,6 @@ import (
 
 	"github.com/hveda/todo/src/types"
 	"github.com/hveda/todo/src/utils"
-	"github.com/google/uuid"
 	"github.com/gorilla/mux"
 )
 
@@ -42,7 +41,7 @@ func (app *AppBase) GetPostFromId(w http.ResponseWriter, r *http.Request) {
 	id := params["id"]
 	post := types.Post{}
 	app.DB.Table("posts").Find(&post, "id = ?", id)
-	if post.ID == uuid.Nil {
+	if post.ID == 0 {
 		w.WriteHeader(404)
 		utils.JsonResponse(w, types.Response{Message: "Could not find post"})
 		return

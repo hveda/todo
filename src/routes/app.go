@@ -31,6 +31,26 @@ func (app *AppBase) CreateRoutes(router *mux.Router) *AppBase {
 	router.HandleFunc("/posts", app.CreatePost).Methods("POST")
 	router.HandleFunc("/posts", app.GetPosts).Methods("GET")
 	router.HandleFunc("/posts/{id}", app.GetPostFromId).Methods("GET")
+	// ActivityGroupsGet - Get All
+	router.HandleFunc("/activity-groups", app.ActivityGroupsGet).Methods("GET")
+	// ActivityGroupsPost - Create
+	router.HandleFunc("/activity-groups", app.ActivityGroupsPost).Methods("POST")
+	// DeleteActivityById - Delete
+	router.HandleFunc("/activity-groups/{id}", app.DeleteActivityById).Methods("DELETE")
+	// PatchActivityById - Update
+	router.HandleFunc("/activity-groups/{id}", app.PatchActivityById).Methods("PATCH")
+	// ShowActivityById - Get One
+	router.HandleFunc("/activity-groups/{id}", app.ShowActivityById).Methods("GET")
+	// DeleteToDoById - Delete
+	router.HandleFunc("/todo-items/{id}", app.DeleteToDoById).Methods("DELETE")
+	// PatchToDoById - Update
+	router.HandleFunc("/todo-items/{id}", app.PatchToDoById).Methods("PATCh")
+	// ShowToDoById - Get One
+	router.HandleFunc("/todo-items/{id}", app.ShowToDoById).Methods("GET")
+	// TodoItemsGet - Get All
+	router.HandleFunc("/todo-items", app.TodoItemsGet).Methods("GET")
+	// TodoItemsPost - Create
+	router.HandleFunc("/todo-items", app.TodoItemsPost).Methods("POST")
 
 	return app
 }

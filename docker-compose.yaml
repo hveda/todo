@@ -38,14 +38,14 @@ services:
       MYSQL_PASSWORD: password
       MYSQL_ROOT_PASSWORD: password
 
-  # document:
-  #   container_name: document
-  #   build:
-  #     context: .
-  #     dockerfile: ./docker/document/Dockerfile
-  #   environment:
-  #     API_URL: swagger/openapi.yaml
-  #   ports:
-  #     - '8081:8080'
-    # volumes:
-    #   - ./docs/api:/usr/share/nginx/html/swagger
+  docs:
+    container_name: docs
+    build:
+      context: .
+      dockerfile: ./docker/docs/Dockerfile
+    environment:
+      API_URL: swagger/openapi.yaml
+    ports:
+      - '8081:8080'
+    volumes:
+      - ./docs:/usr/share/nginx/html/swagger

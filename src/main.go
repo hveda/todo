@@ -5,6 +5,7 @@ import (
 	"net/http"
 
 	"github.com/hveda/todo/src/routes"
+	"github.com/hveda/todo/src/types"
 	"github.com/hveda/todo/src/utils"
 	"github.com/gorilla/mux"
 )
@@ -16,7 +17,10 @@ func main() {
 		log.Fatal("Could not connect to database.\n", err)
 		return
 	}
-	
+
+	// Migrate db when success to connect
+	conn.AutoMigrate(&types.Activity{}, &types.ToDo{})
+
 	// Create router instance
 	router := mux.NewRouter()
 	// Create app base with DB connection
