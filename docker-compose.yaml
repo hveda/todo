@@ -1,0 +1,51 @@
+version: "3"
+
+services:
+  api-server:
+    container_name: api-server
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    ports:
+      - "3030:3030"
+    volumes:
+      - ./:/usr/local/go/src/
+    environment:
+      MYSQL_HOST: mysql
+      MYSQL_PORT: 3306
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+      MYSQL_DBNAME: challenge_2_db
+    tty: true
+    restart: always
+    depends_on:
+      - mysql
+
+  mysql:
+    container_name: db
+    build:
+      context: .
+      dockerfile: ./docker/mysql/Dockerfile
+    ports:
+      - "3306:3306"
+    volumes:
+      # gorm can struct->automigrate as well
+      - ./mysql/init:/docker-entrypoint-initdb.d
+      - ./mysql/mount:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: challenge_2_db
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: password
+
+  # document:
+  #   container_name: document
+  #   build:
+  #     context: .
+  #     dockerfile: ./docker/document/Dockerfile
+  #   environment:
+  #     API_URL: swagger/openapi.yaml
+  #   ports:
+  #     - '8081:8080'
+    # volumes:
+    #   - ./docs/api:/usr/share/nginx/html/swagger
