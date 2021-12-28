@@ -1,25 +1,25 @@
 version: "3"
 
 services:
-  api-server:
-    container_name: api-server
-    build:
-      context: .
-      dockerfile: ./Dockerfile
-    ports:
-      - "3030:3030"
-    volumes:
-      - ./:/usr/local/go/src/
-    environment:
-      MYSQL_HOST: mysql
-      MYSQL_PORT: 3306
-      MYSQL_USER: user
-      MYSQL_PASSWORD: password
-      MYSQL_DBNAME: challenge_2_db
-    tty: true
-    restart: always
-    depends_on:
-      - mysql
+  # api-server:
+  #   container_name: api-server
+  #   build:
+  #     context: .
+  #     dockerfile: ./Dockerfile
+  #   ports:
+  #     - "3030:3030"
+  #   volumes:
+  #     - ./:/usr/local/go/src/
+  #   environment:
+  #     MYSQL_HOST: mysql
+  #     MYSQL_PORT: 3306
+  #     MYSQL_USER: user
+  #     MYSQL_PASSWORD: password
+  #     MYSQL_DBNAME: challenge_2_db
+  #   tty: true
+  #   restart: always
+  #   depends_on:
+  #     - mysql
 
   mysql:
     container_name: db
@@ -38,14 +38,14 @@ services:
       MYSQL_PASSWORD: password
       MYSQL_ROOT_PASSWORD: password
 
-  docs:
-    container_name: docs
-    build:
-      context: .
-      dockerfile: ./docker/docs/Dockerfile
-    environment:
-      API_URL: swagger/openapi.yaml
-    ports:
-      - '8081:8080'
-    volumes:
-      - ./docs:/usr/share/nginx/html/swagger
+  # docs:
+  #   container_name: docs
+  #   build:
+  #     context: .
+  #     dockerfile: ./docker/docs/Dockerfile
+  #   environment:
+  #     API_URL: swagger/openapi.yaml
+  #   ports:
+  #     - '8081:8080'
+  #   volumes:
+  #     - ./docs:/usr/share/nginx/html/swagger

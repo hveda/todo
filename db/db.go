@@ -31,7 +31,10 @@ func Init() {
 		getEnv("MYSQL_PORT", "3306"),
 		getEnv("MYSQL_DBNAME", "challenge_2_db"),
 	)
-	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
+	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{
+		SkipDefaultTransaction: true,
+		PrepareStmt: true,
+	})
 	if err != nil {
 		panic(err.Error)
 	}

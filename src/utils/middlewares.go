@@ -1,20 +1,25 @@
 package utils
 
 import (
-	"fmt"
+	// "fmt"
 	"net/http"
 
-	"github.com/hveda/todo/src/types"
+	// "github.com/hveda/todo/src/types"
 )
 
 func HandleMethod(method string, next http.Handler) http.Handler {
+	// return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+	// 	if r.Method != method {
+	// 		JsonResponse(w, types.Response{Message: fmt.Sprintf("Method [%s] not allowed", r.Method)})
+	// 		return
+	// 	}
+	// 	w.Header().Add("Content-Type", "application/json")
+	// 	next.ServeHTTP(w, r)
+	// })
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		if r.Method != method {
-			JsonResponse(w, types.Response{Message: fmt.Sprintf("Method [%s] not allowed", r.Method)})
-			return
-		}
-		next.ServeHTTP(w, r)
-	})
+        w.Header().Add("Content-Type", "application/json")
+        next.ServeHTTP(w, r)
+    })
 }
 
 func HandleGet(next http.Handler) http.Handler {
