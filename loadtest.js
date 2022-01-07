@@ -8,7 +8,7 @@
 
 const loadtest = require('loadtest');
 
-const max_requests = 100000
+const max_requests = 2000
 const concurrency = 1000
 
 const options = {
@@ -19,11 +19,11 @@ const options = {
 	requestsPerSecond:max_requests,
 	maxSeconds:60,
 	requestGenerator: (params, options, client, callback) => {
-		const message = '{"hi": "ho"}';
+		const message = '{"title": "test","activity_group_id": "123"}';
 		options.headers['Content-Length'] = message.length;
 		options.headers['Content-Type'] = 'application/json';
-		options.body = '{"title": "test","email": "wow@gmail.com"}';
-		options.path = '/activity-groups';
+		options.body = '{"title": "test","activity_group_id": "123"}';
+		options.path = '/todo-items';
 		const request = client(options, callback);
 		request.write(message);
 		return request;
